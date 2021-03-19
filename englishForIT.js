@@ -27,10 +27,6 @@ const apiData = await getNewCasesData();
 const widgetSize = (config.widgetFamily ? config.widgetFamily : 'small');
 const widget = await createWidget();
 
-// Update Interval
-var refreshDate = Date.now() + 1000*60*updateTime;
- widget.refreshAfterDate = new Date(refreshDate);
-
 // For debug delete "!" from !config.runInWidget
 if (!config.runInWidget) {
  switch(widgetSize) {
@@ -51,25 +47,24 @@ Script.complete();
 async function createWidget() {
 
  const list = new ListWidget();
+ // Update Interval
+ var refreshDate = Date.now() + 1000*60*updateTime;
+ list.refreshAfterDate = new Date(refreshDate);
 
  let gradient = new LinearGradient();
  gradient.locations = [0, 0.5];
  gradient.colors = [new Color("141414"), new Color("4974a5")];
  list.backgroundGradient = gradient;
-
- let row1 = list.addStack();
- row1.layoutHorizontally();
- row1.addSpacer(1);
-
- let column1 = row1.addStack();
- column1.layoutVertically();
-
- let column2 = row1.addStack();
- column2.layoutVertically();
+ let firstRow = list.addStack();
+ firstRow.layoutHorizontally();
+ firstRow.addSpacer(1);
+ let firstColumn = firstRow.addStack();
+ firstColumn.layoutVertically();
+ let secondColumn = firstRow.addStack();
+ secondColumn.layoutVertically();
 
  const logoImg = await getImage('flaticon2.png');
- const logoStack = column2.addStack();
-
+ const logoStack = secondColumn.addStack();
  if (widgetSize != 'small'){
    logoStack.addSpacer(60);
    list.setPadding(15, 25, 5, 25);
@@ -78,12 +73,12 @@ async function createWidget() {
    list.setPadding(5, 5, 5, 5);
  }
 
+
  const logoImageStack = logoStack.addStack();
  logoStack.layoutHorizontally();
  logoImageStack.backgroundColor = new Color("#ffffff", 1.0);
  logoImageStack.cornerRadius = 6;
  const wimg = logoImageStack.addImage(logoImg);
-
  if(widgetSize != 'small'){
    wimg.imageSize = new Size(50, 50);
    wimg.rightAlignImage();
@@ -92,28 +87,31 @@ async function createWidget() {
    wimg.rightAlignImage();
  }
 
- const paperText = column1.addText("Vocabulary");
+
+ const sideTitle = firstColumn.addText("Vocabulary");
  if(widgetSize != 'small'){
-   paperText.textColor = Color.white();
-   paperText.textOpacity = 0.5;
-   paperText.font = Font.mediumRoundedSystemFont(20);
+   sideTitle.textColor = Color.white();
+   sideTitle.textOpacity = 0.5;
+   sideTitle.font = Font.mediumRoundedSystemFont(20);
  }else{
-   paperText.textColor = Color.white();
-   paperText.textOpacity = 0.9;
-   paperText.font = Font.mediumRoundedSystemFont(16);
+   sideTitle.textColor = Color.white();
+   sideTitle.textOpacity = 0.9;
+   sideTitle.font = Font.mediumRoundedSystemFont(16);
  }
 
- const paperText2 = column1.addText("IT-English");
+
+ const tagLine = firstColumn.addText("IT-English");
  if(widgetSize != 'small'){
-   paperText2.textColor = Color.white();
-   paperText2.textOpacity = 0.5;
-   paperText2.font = Font.mediumRoundedSystemFont(20);
+   tagLine.textColor = Color.white();
+   tagLine.textOpacity = 0.5;
+   tagLine.font = Font.mediumRoundedSystemFont(20);
  }else{
-   paperText2.textColor = Color.white();
-   paperText2.textOpacity = 0.9;
-   paperText2.font = Font.mediumRoundedSystemFont(16);
+   tagLine.textColor = Color.white();
+   tagLine.textOpacity = 0.9;
+   tagLine.font = Font.mediumRoundedSystemFont(16);
  }
  list.addSpacer(4)
+
 
  if(widgetSize != 'small'){
    list.addSpacer(8);
@@ -124,13 +122,13 @@ async function createWidget() {
    vocGer.font = Font.regularSystemFont(20);
  }else{
    list.addSpacer(4);
-  
    const vocEng = list.addText("🇬🇧  " + apiData.vocabulary[numb].english);
    vocEng.font = Font.boldSystemFont(12);
    list.addSpacer(2);
    const vocGer = list.addText("🇩🇪  " + apiData.vocabulary[numb].german);
    vocGer.font = Font.boldSystemFont(12);
  }
+
 
  if(widgetSize != 'small'){
    list.addSpacer(8);
@@ -142,21 +140,19 @@ async function createWidget() {
    vocEng.font = Font.regularSystemFont(10);
  }
 
+
  if(widgetSize != 'small'){
    list.addSpacer(8);
    const footer = list.addStack();
    footer.layoutHorizontally();
-
    const footerLeft = footer.addStack();
    footerLeft.backgroundColor = new Color('#a0a0a0', .6);
    footerLeft.cornerRadius = 3;
    footerLeft.setPadding(2, 4, 2, 4);
-
    const footerWidget = footerLeft.addText('affengriff.net');
    footerWidget.url = 'https://affengriff.net';
    footerWidget.font = Font.mediumSystemFont(8);
    footerWidget.color = new Color('#efefef');
-
    footer.addSpacer(14);
  }else{
    // nothing at the moment
@@ -168,7 +164,7 @@ return list;
 //------------------------------------------------
 // url get json
 async function getNewCasesData(){
- let url = "https://affengriff.net/wp-content/uploads/2021/03/language_IT_Eng.json";
+ let url = "https://affengriff.net/wp-content/uploads/2021/03/englishForItVocs.json";
  let req = new Request(url);
  let apiResult = await req.loadJSON();
 
