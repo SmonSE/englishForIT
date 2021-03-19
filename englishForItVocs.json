@@ -1,0 +1,73 @@
+{
+  "englishIt": "Vocabulary for IT english",
+  "createdAt":"2021-03-18 11:43:00.000000",
+  "active": true,
+  "vocabulary":[
+    {
+      "pos:": "001",
+      "english": "Application",
+      "german": "Anwendung",
+      "meaning": "Any program designed to perform a specific function directly for the user."
+    },
+    {
+      "pos:": "002",
+      "english": "Avatar",
+      "german": "Benutzerbild",
+      "meaning": "An icon or figure that represents a person in video games, chat rooms and on Internet forums."
+    },
+    {
+      "pos:": "003",
+      "english": "Bug",
+      "german": "Fehler",
+      "meaning": "A defect or fault in a program that prevents it from working correctly."
+    },
+    {
+      "pos:": "004",
+      "english": "Cache",
+      "german": "Zwischenspeicher",
+      "meaning": "A sort of fast memory used for temporary storage, for quicker access."
+    },
+    {
+      "pos:": "005",
+      "english": "Cursor",
+      "german": "Mauszeiger",
+      "meaning": "A blinking symbol on the screen that shows where any new text will next be entered."
+    },
+    {
+      "pos:": "006",
+      "english": "Driver",
+      "german": "Treiber",
+      "meaning": "A special program which enables a computer to work with a particular piece of hardware such as a printer."
+    },
+    {
+      "pos:": "007",
+      "english": "Firewall",
+      "german": "Firewall",
+      "meaning": "Specialised hardware or software designed to prevent unauthorised access into or out of a computer / network."
+    },
+    {
+      "pos:": "008",
+      "english": "Font",
+      "german": "Schriftart",
+      "meaning": "A particular kind of lettering (e.g. Arial, Verdana, etc.)"
+    },
+    {
+      "pos:": "009",
+      "english": "Hit",
+      "german": "Treffer",
+      "meaning": "A visit to a website."
+    },
+    {
+      "pos:": "010",
+      "english": "Portal",
+      "german": "Tor",
+      "meaning": "A website that acts as a gateway or entry point to the internet (for example, Yahoo)."
+    },
+    {
+      "pos:": "011",
+      "english": "Browser",
+      "german": "Browser",
+      "meaning": "A program or tool such as Google that enables you to browse or surf the World Wide Web."
+    }
+  ]
+}
